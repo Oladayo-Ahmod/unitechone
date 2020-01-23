@@ -1,0 +1,43 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dictionary App</title>
+	<link rel="stylesheet" type="text/css" href="dictionary.css">
+</head>
+<body>
+	<div id="container">
+		<div class="contains">
+		<input type="text" name="text" id="text">
+		<button id="speak">speak</button>
+	</div>
+	<div class="defs">
+		<h5 class="words"></h5>
+		<h6 class="type"></h6>
+		<p class="defs"></p>
+	</div>
+	<script type="text/javascript">
+		const meaning = () =>{
+			let word = document.querySelector("#text").value;
+			fetch('https://definitionapi.cf/'+ word).then(res=>res.json()).then(data=> {
+				let wording = document.querySelector(".words")
+				let type = document.querySelector(".type")
+				let defs = document.querySelector(".defs")
+				if (data.word == undefined) {
+					wording.innerHTML = data.error
+				}
+				else{
+					wording.innerHTML = data.word
+					type.innerHTML = data.type
+					data.definitionforEach(defs)
+				}
+			})
+		}
+
+
+
+
+	</script>
+</body>
+</html>
